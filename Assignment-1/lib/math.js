@@ -19,3 +19,4 @@ const div = (num1, num2) => {
 module.exports={ 
     add,sub,multi,div
 };
+

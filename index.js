@@ -12,3 +12,4 @@ app.get("/",(req,res)=>{
 app.get("/apple",(req,res)=>{
     res.send("HELLO I AM APPLE")
 })
+
