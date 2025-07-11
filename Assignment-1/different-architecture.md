@@ -141,3 +141,4 @@ This document highlights the distinctions among various software architecture ty
 ---
 
 Happy designing! 🛠️
+

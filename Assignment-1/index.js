@@ -46,3 +46,4 @@ Division,${ansDiv}
     takeInput.close();
   });
 });
+

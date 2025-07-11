@@ -76,3 +76,4 @@ The **Client-Server architecture** is the most common pattern in modern web and 
 ---
 
 Happy learning! 🎯
+
