@@ -10,5 +10,5 @@ app.get("/",(req,res)=>{
     res.send("HELLO I AM FROM ROOT")
 })
 app.get("/apple",(req,res)=>{
-    res.send("HELLO I AM FROM ROO0000000000000T")
+    res.send("HELLO I AM APPLE")
 })
