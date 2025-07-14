@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { performMathOperation } from "./src/app1";
+import { performMathOperation } from "./src/app";
 import cookieParser from "cookie-parser";
 import { mockArr } from "./src/mockData";
 

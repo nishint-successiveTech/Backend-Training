@@ -1,6 +1,6 @@
 import readline from "readline";
 import fs from "fs";
-import { add, sub, multi, div } from "../lib/math";
+import { add, sub, multi, div } from "./lib/math";
 
 export function performMathOperation(): void {
   const takeInput = readline.createInterface({
@@ -8,10 +8,10 @@ export function performMathOperation(): void {
     output: process.stdout,
   });
 
-  takeInput.question("ENTER FIRST NUMBER ", (n1: string) => {
-    takeInput.question("ENTER SECOND NUMBER ", (n2: string) => {
-      const firstNum: number = parseInt(n1);
-      const secondNum: number = parseInt(n2);
+  takeInput.question("ENTER FIRST NUMBER ", (num1: string) => {
+    takeInput.question("ENTER SECOND NUMBER ", (num2: string) => {
+      const firstNum: number = parseInt(num1);
+      const secondNum: number = parseInt(num2);
 
       const ansAdd: number = add(firstNum, secondNum);
       const ansMulti: number = multi(firstNum, secondNum);
