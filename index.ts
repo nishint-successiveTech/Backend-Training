@@ -1,46 +1,34 @@
-import readline from "readline";
-import fs from "fs";
-import { add, sub, multi, div } from "./src/lib/math.js";
+import express, { Request, Response } from "express";
+import { performMathOperation } from "./src/app1";
+import cookieParser from "cookie-parser";
+import { mockArr } from "./src/mockData";
 
-const takeInput = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+const app = express();
+const port = 9090;
+
+app.use(cookieParser());
+
+app.get("/setCookie", (req: Request, res: Response) => {
+  res.cookie("user", "nishint");
+  res.send("COOKIE SET SUCCESSFULLY..");
+});
+app.get("/getCookie", (req: Request, res: Response) => {
+  res.send(req.cookies.user);
 });
 
-takeInput.question("ENTER FIRST NUMBER ", (n1: string) => {
-  takeInput.question("ENTER SECOND NUMBER ", (n2: string) => {
-    const firstNum: number = parseInt(n1);
-    const secondNum: number = parseInt(n2);
+app.get("/run/math", (req: Request, res: Response) => {
+  performMathOperation();
+  res.send("PLEASE CHECK TERMINAL");
+});
 
-    const ansAdd: number = add(firstNum, secondNum);
-    const ansMulti: number = multi(firstNum, secondNum);
-    const ansSub: number = sub(firstNum, secondNum);
-    let ansDiv: number | string;
+app.get("/mockList", (req: Request, res: Response) => {
+  res.json(mockArr);
+});
 
-    try {
-      ansDiv = div(firstNum, secondNum);
-    } catch (e: any) {
-      ansDiv = e.message;
-      console.error(e.message);
-    }
+app.get("/", (req: Request, res: Response) => {
+  res.send("HELLO NISHINT");
+});
 
-    console.log(`Addition of ${firstNum} and ${secondNum} is ${ansAdd}`);
-    console.log(`Subtraction of ${firstNum} and ${secondNum} is ${ansSub}`);
-    console.log(
-      `Multiplication of ${firstNum} and ${secondNum} is ${ansMulti}`
-    );
-    console.log(`Division  of ${firstNum} and ${secondNum} is ${ansDiv}`);
-
-    const dataCsv: string = `Operation,Result
-Addition,${ansAdd}
-Subtraction,${ansSub}
-Multiplication,${ansMulti}
-Division,${ansDiv}
-`;
-
-    fs.writeFileSync("result.csv", dataCsv);
-    console.log("SAVED SUCCESSFULLY IN CSV");
-
-    takeInput.close();
-  });
+app.listen(port, () => {
+  console.log(`SERVER SUCCESSFULLY RUNNING ON PORT ${port}`);
 });

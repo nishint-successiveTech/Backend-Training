@@ -2,11 +2,11 @@
   "name": "backend-training",
   "version": "1.0.0",
   "description": "This is backend training",
-  "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node ./dist/index.js",
-    "build": "tsc"
+    "dev": "nodemon --watch src --ext ts --exec \"npx ts-node --esm\" index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
   },
   "author": "Nishint Goyal",
   "license": "ISC",
@@ -16,8 +16,12 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/express": "^4.17.23",
     "@types/lodash": "^4.17.20",
     "@types/node": "^20.19.7",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
 }
