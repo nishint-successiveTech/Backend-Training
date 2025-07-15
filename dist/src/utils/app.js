@@ -12,10 +12,10 @@ function performMathOperation() {
         input: process.stdin,
         output: process.stdout,
     });
-    takeInput.question("ENTER FIRST NUMBER ", (n1) => {
-        takeInput.question("ENTER SECOND NUMBER ", (n2) => {
-            const firstNum = parseInt(n1);
-            const secondNum = parseInt(n2);
+    takeInput.question("ENTER FIRST NUMBER ", (num1) => {
+        takeInput.question("ENTER SECOND NUMBER ", (num2) => {
+            const firstNum = parseInt(num1);
+            const secondNum = parseInt(num2);
             const ansAdd = (0, math_1.add)(firstNum, secondNum);
             const ansMulti = (0, math_1.multi)(firstNum, secondNum);
             const ansSub = (0, math_1.sub)(firstNum, secondNum);
@@ -43,4 +43,4 @@ Division,${ansDiv}
         });
     });
 }
-//# sourceMappingURL=app1.js.map
+//# sourceMappingURL=app.js.map
