@@ -13,7 +13,13 @@ app.get("/setCookie", (req: Request, res: Response) => {
   res.send("COOKIE SET SUCCESSFULLY..");
 });
 app.get("/getCookie", (req: Request, res: Response) => {
+  if (!req.cookies.user)
+    return res.send("PLEASE SET COOKIE'S FIRST,NO COOKIES FOUND");
   res.send(req.cookies.user);
+});
+app.get("/clearCookie", (req: Request, res: Response) => {
+  res.clearCookie("user");
+  res.send("COOKIE CLEAR SUCCESSFULLY");
 });
 
 app.get("/run/math", (req: Request, res: Response) => {
