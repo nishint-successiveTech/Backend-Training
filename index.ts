@@ -38,3 +38,4 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`SERVER SUCCESSFULLY RUNNING ON PORT ${port}`);
 });
+
