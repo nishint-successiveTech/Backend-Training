@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { runMathOperation } from "../controllers/mathController";
-import { authenticate } from "../middleware/ authentication";
+import { authenticate } from "../middleware/authentication";
 import { infoRequest } from "../middleware/infoRequest";
 import { anyError } from "../middleware/errorCatching";
 

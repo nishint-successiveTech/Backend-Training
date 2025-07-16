@@ -2,12 +2,16 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
 const SECRET_KEY = "NISHINT-GOYAL-SUCCESSIVE-TECH";
+const users = [{ name: "nishint", password: "12345" }];
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const { user, password } = req.body;
+  const checking = users.find(
+    (u) => u.name === user && u.password === password
+  );
 
-  if (user == "nishint" && password == "12345") {
-    const token = jwt.sign({ user }, SECRET_KEY);
+  if (checking) {
+    const token = jwt.sign({ user }, SECRET_KEY, { expiresIn: "1h" });
     return res.send("TOKEN SUCCESSFULLY GENERATED: " + "Bearer " + token);
   } else {
     return next(

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 const SECRET_KEY = "NISHINT-GOYAL-SUCCESSIVE-TECH";
+const users = [{ name: "nishint", password: "12345" }];
 
 export const authenticate = (
   req: Request,
@@ -16,7 +17,13 @@ export const authenticate = (
   const token = authHeader.split(" ")[1];
 
   try {
-    jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, SECRET_KEY) as { username: string };
+    const user = users.find((u) => u.name === decoded.username);
+    if (!user) {
+      return next(
+        new Error(`Invalid token user not found ${decoded.username}`)
+      );
+    }
     console.log("TOKEN SUCCESSFULLY VERIFIED");
     next();
   } catch (e) {
