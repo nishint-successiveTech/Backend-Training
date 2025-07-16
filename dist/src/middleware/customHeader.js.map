@@ -1,1 +1,0 @@
-{"version":3,"file":"customHeader.js","sourceRoot":"","sources":["../../../src/middleware/customHeader.ts"],"names":[],"mappings":";;;AAEO,MAAM,eAAe,GAAG,CAAC,KAAa,EAAE,EAAE;IAC/C,OAAO,CAAC,GAAY,EAAE,GAAa,EAAE,IAAkB,EAAE,EAAE;QACzD,GAAG,CAAC,SAAS,CAAC,eAAe,EAAE,KAAK,CAAC,CAAC;QACtC,IAAI,EAAE,CAAC;IACT,CAAC,CAAC;AACJ,CAAC,CAAC;AALW,QAAA,eAAe,mBAK1B"}
