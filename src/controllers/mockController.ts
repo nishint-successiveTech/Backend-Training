@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { mockArr } from "../mockData";
+import { mockArr } from "../utils/mockData";
 
 export const getMockList = (req: Request, res: Response) => {
   res.json(mockArr);
