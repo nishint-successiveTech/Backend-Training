@@ -1,6 +1,6 @@
 import readline from "readline";
 import fs from "fs";
-import { add, sub, multi, div } from "./lib/math";
+import { add, sub, multi, div } from "../lib/math";
 
 export function performMathOperation(): void {
   const takeInput = readline.createInterface({
