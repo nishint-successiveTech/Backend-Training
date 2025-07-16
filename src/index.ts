@@ -7,6 +7,7 @@ import { cookieRouter } from "./routes/cookieRoutes";
 import { infoRequest } from "./middleware/infoRequest";
 import { anyError } from "./middleware/errorCatching";
 import { addCustomHeader } from "./middleware/customHeader";
+import { rateLimiter } from "./middleware/rateLimiter";
 
 const app = express();
 const PORT = 9090;
@@ -14,6 +15,7 @@ const PORT = 9090;
 app.use(cookieParser());
 app.use(express.json());
 app.use(addCustomHeader("HEADER-123456"));
+app.use(rateLimiter(1 * 60 * 1000, 3));
 
 app.use(authRouter);
 app.use(mockRouter);
