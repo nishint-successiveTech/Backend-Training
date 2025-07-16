@@ -7,7 +7,7 @@ export const setCookie = (req: Request, res: Response) => {
 
 export const getCookie = (req: Request, res: Response) => {
   if (!req.cookies.user) {
-    return res.send("PLEASE SET COOKIE'S FIRST, NO COOKIES FOUND");
+    res.send("PLEASE SET COOKIE'S FIRST, NO COOKIES FOUND");
   }
   res.send(req.cookies.user);
 };

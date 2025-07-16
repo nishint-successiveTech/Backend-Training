@@ -4,8 +4,9 @@ import {
   getCookie,
   clearCookie,
 } from "../controllers/cookieController";
+import { infoRequest } from "../middleware/infoRequest";
 
 export const cookieRouter = Router();
-cookieRouter.get("/setCookie", setCookie);
-cookieRouter.get("/getCookie", getCookie);
-cookieRouter.get("/clearCookie", clearCookie);
+cookieRouter.get("/setCookie", infoRequest, setCookie);
+cookieRouter.get("/getCookie", infoRequest, getCookie);
+cookieRouter.get("/clearCookie", infoRequest, clearCookie);

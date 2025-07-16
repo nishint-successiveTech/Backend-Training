@@ -9,7 +9,7 @@ const SECRET_KEY = "NISHINT-GOYAL-SUCCESSIVE-TECH";
 const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-        return res.send("NO TOKEN PROVIDED,PLEASE PROVIDE THE TOKEN FIRST");
+        return next(new Error("NO TOKEN PROVIDED,PLEASE PROVIDE THE TOKEN FIRST"));
     }
     const token = authHeader.split(" ")[1];
     try {
@@ -18,7 +18,7 @@ const authenticate = (req, res, next) => {
         next();
     }
     catch (e) {
-        res.send("WRONG TOKEN,PLEASE ENTER CORRECT DETAILS");
+        return next(new Error("WRONG TOKEN,PLEASE ENTER CORRECT DETAILS"));
     }
 };
 exports.authenticate = authenticate;

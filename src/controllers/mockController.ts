@@ -10,3 +10,4 @@ export const getSeedData = (req: Request, res: Response) => {
     data: mockArr,
   });
 };
+
