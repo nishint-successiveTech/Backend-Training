@@ -2,14 +2,23 @@ import { Request, Response, NextFunction } from "express";
 import Joi, { valid } from "joi";
 
 const userSchema = Joi.object({
-  username: Joi.string().alphanum().min(3).max(30).required(),
+  username: Joi.string().min(3).max(30).required(),
 
   email: Joi.string().email().required(),
 
-  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
+  city:Joi.string().min(1).required(),
+
+  password: Joi.string()
+    .min(8)
+    .max(30)
+    .pattern(/[A-Z]/, "uppercase letter")
+    .pattern(/[a-z]/, "lowercase letter")
+    .pattern(/[0-9]/, "number")
+    .pattern(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, "special character")
+    .required(),
 });
 
-export const validateUserJoi = (
+export const validateFormJoi = (
   req: Request,
   res: Response,
   next: NextFunction

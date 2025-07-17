@@ -9,6 +9,10 @@ import { anyError } from "./middleware/errorCatching";
 import { addCustomHeader } from "./middleware/customHeader";
 import { rateLimiter } from "./middleware/rateLimiter";
 import { joiRouter } from "./routes/joiRoutes";
+import { formRouter } from "./routes/registrationFormRoute";
+import { queryValidator } from "./middleware/queryValidator";
+import { geoRouter } from "./routes/geoLocationRoute";
+import { sportsRoute } from "./routes/sportsRoute";
 
 const app = express();
 const PORT = 9090;
@@ -23,8 +27,11 @@ app.use(mockRouter);
 app.use(cookieRouter);
 app.use(mathRouter);
 app.use(joiRouter);
+app.use(formRouter);
+app.use(geoRouter);
+app.use(sportsRoute);
 
-app.get("/", infoRequest, (req: Request, res: Response) => {
+app.get("/", infoRequest, queryValidator, (req: Request, res: Response) => {
   res.send("WELCOME NISHINT");
 });
 

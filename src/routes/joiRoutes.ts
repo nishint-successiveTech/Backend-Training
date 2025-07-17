@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { joiValidator } from "../controllers/joiValidator";
-import { validateDataJoi } from "../middleware/validateUserJoi";
+import { validateUserJoi } from "../middleware/validateUserJoi";
 
 export const joiRouter = Router();
 
-joiRouter.post("/joiValidator", validateDataJoi, joiValidator);
+joiRouter.post("/joiValidator", validateUserJoi,joiValidator);
