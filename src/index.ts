@@ -31,7 +31,6 @@ app.use(authRouter);
 app.use(mockRouter);
 app.use(cookieRouter);
 app.use(mathRouter);
-app.use(joiRouter);
 app.use(formRouter);
 app.use(geoRouter);
 app.use(sportsRoute);

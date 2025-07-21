@@ -11,3 +11,14 @@ export const getUser = (req: Request, res: Response) => {
     },
   });
 };
+
+export const getUser2 = (req: Request, res: Response) => {
+  const { username,email,password} = req.body;
+  res.json({
+    data:{
+      Username:username,
+      Email:email,
+      Password:password
+    }
+  })
+};
