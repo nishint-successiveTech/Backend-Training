@@ -17,6 +17,7 @@ import { notFoundMiddleware } from "./middleware/notFoundMiddleware";
 import { errorShowRoute } from "./routes/errorShowRoute";
 import { fetchAPIRoute } from "./routes/fetchAPIRoute";
 import { userRoutes } from "./routes/userRoutes";
+import { healthRoute } from "./routes/healthRoute";
 
 const app = express();
 const PORT = 9090;
@@ -37,6 +38,7 @@ app.use(sportsRoute);
 app.use(errorShowRoute);
 app.use(fetchAPIRoute);
 app.use(userRoutes);
+app.use(healthRoute);
 
 app.get("/", infoRequest, queryValidator, (req: Request, res: Response) => {
   res.send("WELCOME NISHINT");
