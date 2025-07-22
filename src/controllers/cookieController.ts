@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request,Response } from "express";
 
 export const setCookie = (req: Request, res: Response) => {
   res.cookie("user", "nishint");
