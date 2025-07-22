@@ -1,14 +1,15 @@
 import { Router } from "express";
-import { runMathOperation } from "../controllers/mathController";
 import { authenticate } from "../middleware/authentication";
 import { infoRequest } from "../middleware/infoRequest";
 import { anyError } from "../middleware/errorCatching";
+import { MathController } from "../controllers/MathController";
 
-export const mathRouter = Router();
-mathRouter.get(
+const mathController = new MathController();
+export const MathRouter = Router();
+MathRouter.get(
   "/run/math",
   infoRequest,
   authenticate,
-  runMathOperation,
+  mathController.runMathOperation.bind(mathController),
   anyError
 );

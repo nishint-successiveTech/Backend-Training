@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import axios from "axios";
+import { IHealthController } from "../interfaces/IHealthController";
 
-export class HealthController {
+export class HealthController implements IHealthController {
   public async healthCheck(req: Request, res: Response) {
     const isHealthy = await this.getDataFromAPI();
 
@@ -17,7 +18,7 @@ export class HealthController {
       });
     }
   }
-  async getDataFromAPI() {
+  public async getDataFromAPI() {
     try {
       const dataRes = await axios.get(
         "https://jsonplaceholder.typicode.com/posts/1"
