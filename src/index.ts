@@ -13,6 +13,10 @@ import { formRouter } from "./routes/registrationFormRoute";
 import { queryValidator } from "./middleware/queryValidator";
 import { geoRouter } from "./routes/geoLocationRoute";
 import { sportsRoute } from "./routes/sportsRoute";
+import { notFoundMiddleware } from "./middleware/notFoundMiddleware";
+import { errorShowRoute } from "./routes/errorShowRoute";
+import { fetchAPIRoute } from "./routes/fetchAPIRoute";
+import { userRoutes } from "./routes/userRoutes";
 
 const app = express();
 const PORT = 9090;
@@ -20,7 +24,7 @@ const PORT = 9090;
 app.use(cookieParser());
 app.use(express.json());
 app.use(addCustomHeader("HEADER-123456"));
-app.use(rateLimiter(1 * 60 * 1000, 3));
+app.use(rateLimiter(1 * 60 * 1000, 10));
 
 app.use(authRouter);
 app.use(mockRouter);
@@ -30,11 +34,15 @@ app.use(joiRouter);
 app.use(formRouter);
 app.use(geoRouter);
 app.use(sportsRoute);
+app.use(errorShowRoute);
+app.use(fetchAPIRoute);
+app.use(userRoutes);
 
 app.get("/", infoRequest, queryValidator, (req: Request, res: Response) => {
   res.send("WELCOME NISHINT");
 });
 
+app.use(notFoundMiddleware);
 app.use(anyError);
 
 app.listen(PORT, () => {
