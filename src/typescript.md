@@ -144,13 +144,82 @@ let counter = 10; // inferred as number
 
 ---
 
+## Classes in TypeScript
+
+Classes in TypeScript provide a way to create reusable objects with properties and methods. TypeScript supports inheritance, access modifiers (public, private, protected), and constructors.
+
+### Example of a Class:
+
+```typescript
+class Animal {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    move(distance: number): void {
+        console.log(`${this.name} moved ${distance}m.`);
+    }
+}
+
+let dog = new Animal("Buddy");
+dog.move(10);
+```
+
+### Access Modifiers:
+- **public**: Accessible from anywhere.
+- **private**: Accessible only within the class.
+- **protected**: Accessible within the class and its subclasses.
+
+---
+
+## Interfaces in TypeScript
+
+Interfaces define the shape of objects. They can specify properties, methods, and their types but do not contain implementations.
+
+### Example of an Interface:
+
+```typescript
+interface Person {
+    firstName: string;
+    lastName: string;
+    age?: number; // optional property
+}
+
+function greet(person: Person) {
+    console.log(`Hello, ${person.firstName} ${person.lastName}`);
+}
+
+let user = { firstName: "Jane", lastName: "Doe" };
+greet(user);
+```
+
+### Interface with Methods:
+
+```typescript
+interface Shape {
+    area(): number;
+}
+
+class Circle implements Shape {
+    constructor(public radius: number) {}
+
+    area(): number {
+        return Math.PI * this.radius ** 2;
+    }
+}
+```
+
+Interfaces help enforce consistent structures in your code and are commonly used with classes.
+
+---
+
 ## Conclusion
 
-Understanding and using TypeScript's type system effectively enables developers to write safer, more maintainable, and more readable code. Variables and basic types are the foundation for building robust TypeScript applications.
+Understanding and using TypeScript's type system effectively enables developers to write safer, more maintainable, and more readable code. Variables, basic types, classes, and interfaces are the foundation for building robust TypeScript applications.
 
 For more advanced topics, consider exploring:
-- Interfaces
-- Classes
 - Generics
 - Type Aliases
 - Advanced Types (Union, Intersection, etc.)
