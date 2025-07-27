@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { UserAService } from "../services/UserARegistrationService";
 
-export const UserARegistrationController = async (req: Request, res: Response) => {
+export const UserARegistrationController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const userA = await UserAService(req.body);
     res.status(201).json(userA);
@@ -11,4 +14,3 @@ export const UserARegistrationController = async (req: Request, res: Response) =
     });
   }
 };
-

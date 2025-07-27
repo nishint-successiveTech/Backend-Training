@@ -8,5 +8,15 @@ import { authorizeRoleChecker } from "../middleware/roleCheckMiddleware";
 
 export const userAInfoRoute = Router();
 
-userAInfoRoute.get("/userAInfoAllUsers", authenticate2,authorizeRoleChecker(["ADMIN"]),findAllUserController);
-userAInfoRoute.post("/findUserById", authenticate2,authorizeRoleChecker(["USER","ADMIN","DEVELOPER"]),findUserByIdController);
+userAInfoRoute.get(
+  "/userAInfoAllUsers",
+  authenticate2,
+  authorizeRoleChecker(["ADMIN"]),
+  findAllUserController
+);
+userAInfoRoute.post(
+  "/findUserById",
+  authenticate2,
+  authorizeRoleChecker(["USER", "ADMIN", "DEVELOPER"]),
+  findUserByIdController
+);
