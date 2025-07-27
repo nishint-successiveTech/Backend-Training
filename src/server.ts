@@ -19,6 +19,9 @@ import { FetchAPIRouter } from "./routes/FetchAPIRoute";
 import { userRouter } from "./routes/UserRoutes";
 import { HealthRouter } from "./routes/HealthRoute";
 import { CricketRouter } from "./routes/CricketRoute";
+import { userARouter } from "./routes/UserARegistrationRoute";
+import { userALoginRouter } from "./routes/UserALoginRoute";
+import { userAInfoRoute } from "./routes/userAInfoRoute";
 
 const app = express();
 
@@ -38,7 +41,10 @@ app.use(MockRouter);
 app.use(RegistrationFormRouter);
 app.use(SportsRouter);
 app.use(userRouter);
-app.use(CricketRouter)
+app.use(CricketRouter);
+app.use(userARouter);
+app.use(userALoginRouter);
+app.use(userAInfoRoute);
 
 app.get("/", infoRequest, queryValidator, (req: Request, res: Response) => {
   res.send("WELCOME NISHINT");

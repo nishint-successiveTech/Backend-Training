@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const cricketSchema = new mongoose.Schema({
   playerName: {
     type: String,
-    minlength:30,
+    minlength:3,
     required: true,
   },
   team: {
