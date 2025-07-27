@@ -12,9 +12,13 @@ export const UserALoginService = async (data: any) => {
     throw new Error("Invalid password,Please Enter Correct Password");
   }
 
-  const token = jwt.sign({ id: user._id, username: user.username }, "NISHINT", {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { id: user._id, username: user.username, role: user.role },
+    "NISHINT",
+    {
+      expiresIn: "1h",
+    }
+  );
 
   return {
     message: "Login success",

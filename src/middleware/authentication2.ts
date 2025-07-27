@@ -25,6 +25,7 @@ export const authenticate2 = async (
     const jwtVerify = jwt.verify(tokenIs, SECRET_KEY) as {
       id: string;
       username: string;
+      role: string;
     };
 
     const userExist = await UserAModel.findById(jwtVerify.id);
@@ -34,6 +35,12 @@ export const authenticate2 = async (
         errorIs: "USER NO LONGER EXIST INSIDE DATABASE",
       });
     }
+
+    (req as any).user = {
+      id: userExist._id,
+      username: userExist.username,
+      role: userExist.role,
+    };
 
     next();
     return;
