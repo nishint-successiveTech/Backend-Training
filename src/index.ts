@@ -3,7 +3,7 @@ import { connectDB } from "./config/db";
 import { seedCountries } from "./seed/seedCountries";
 import { config } from "./config/config";
 
-const PORT = config.PORT;
+const { PORT } = config;
 
 const startServer = async () => {
   await connectDB();
