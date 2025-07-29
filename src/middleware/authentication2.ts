@@ -22,6 +22,7 @@ export const authenticate2 = async (
     const jwtVerify = jwt.verify(tokenIs, SECRET_KEY) as {
       id: string;
       username: string;
+      role: string;
     };
 
     const userExist = await UserAModel.findById(jwtVerify.id);
@@ -29,6 +30,12 @@ export const authenticate2 = async (
     if (!userExist) {
       throw new Error("NO USER EXIST");
     }
+
+    (req as any).user = {
+      id: userExist._id,
+      username: userExist.username,
+      role: userExist.role,
+    };
 
     next();
   } catch (e) {
