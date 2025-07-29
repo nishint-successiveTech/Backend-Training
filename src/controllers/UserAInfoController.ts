@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response,NextFunction } from "express";
 import {
   findAllUserService,
   findUserByIdService,
 } from "../services/userAInfoService";
 
-export const findAllUserController = async (req: Request, res: Response) => {
+export const findAllUserController = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const allUser = await findAllUserService();
     return res.status(200).json({
@@ -14,16 +14,12 @@ export const findAllUserController = async (req: Request, res: Response) => {
         allUser,
       },
     });
-  } catch (e: any) {
-    return res.status(500).json({
-      message: "FAILED TO FETCH ALL USERS",
-      status: 500,
-      data: {},
-    });
+  } catch (e) {
+      next(e)
   }
 };
 
-export const findUserByIdController = async (req: Request, res: Response) => {
+export const findUserByIdController = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const body = req.body;
     const oneUser = await findUserByIdService(body.id);
@@ -39,12 +35,8 @@ export const findUserByIdController = async (req: Request, res: Response) => {
       status: 200,
       data: oneUser,
     });
-  } catch (error: any) {
-    return res.status(500).json({
-      message: "FAILED TO FETCH USER",
-      status: 500,
-      data: {},
-    });
+  } catch (error) {
+    next(error)
   }
   return;
 };

@@ -29,9 +29,8 @@ export const authenticate2 = async (
     if (!userExist) {
       throw new Error("NO USER EXIST");
     }
-    
+
     next();
-    return;
   } catch (e) {
     next(e);
   }
