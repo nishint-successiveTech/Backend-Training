@@ -5,7 +5,6 @@ export const UserALoginController = async (req: Request, res: Response) => {
   try {
     const login = await UserALoginService(req.body);
 
-    
     res.status(200).json(login);
   } catch (e: any) {
     res.status(401).json({

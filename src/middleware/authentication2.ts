@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 
 import jwt from "jsonwebtoken";
+import { config } from "../config/config";
 import { UserAModel } from "../models/UserAModel";
 
-const SECRET_KEY = "NISHINT";
+const { SECRET_KEY } = config;
 
 export const authenticate2 = async (
   req: Request,
@@ -11,17 +12,13 @@ export const authenticate2 = async (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
-
-  if (!authHeader) {
-    return res.status(401).json({
-      errorIs:
-        "NO TOKEN PROVIDED PLEASE PROVIDE THE TOKEN FIRST INSIDE BODY HEADERS",
-    });
-  }
-
-  const tokenIs = authHeader.split(" ")[1];
-
   try {
+    if (!authHeader) {
+      throw new Error("NO TOKEN PROVIDED ,PLEASE PROVIDE THE TOKEN FIRST");
+    }
+
+    const tokenIs = authHeader.split(" ")[1];
+
     const jwtVerify = jwt.verify(tokenIs, SECRET_KEY) as {
       id: string;
       username: string;
@@ -30,16 +27,12 @@ export const authenticate2 = async (
     const userExist = await UserAModel.findById(jwtVerify.id);
 
     if (!userExist) {
-      return res.status(401).json({
-        errorIs: "USER NO LONGER EXIST INSIDE DATABASE",
-      });
+      throw new Error("NO USER EXIST");
     }
-
+    
     next();
     return;
   } catch (e) {
-    return res.status(401).json({
-      errorIs: "TOKEN IS INVALID OR ALREADY EXPIRED PLEASE SEND CORRECT TOKEN",
-    });
+    next(e);
   }
 };
