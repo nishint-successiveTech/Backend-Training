@@ -39,7 +39,7 @@ app.use(HealthRouter);
 app.use(MathRouter);
 app.use(MockRouter);
 app.use(RegistrationFormRouter);
-app.use(SportsRouter);
+app.use('/sports', SportsRouter);
 app.use(userRouter);
 app.use(CricketRouter);
 app.use(userARouter);

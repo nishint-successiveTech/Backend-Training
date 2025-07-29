@@ -1,38 +1,42 @@
-import { Request, Response } from "express";
+import { Request, Response,NextFunction } from "express";
 import {
   findAllUserService,
   findUserByIdService,
 } from "../services/userAInfoService";
 
-export const findAllUserController = async (req: Request, res: Response) => {
+export const findAllUserController = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const allUser = await findAllUserService();
     return res.status(200).json({
-      messageIs: "ALL USER FETECHED SUCCESSFULLY",
-      allUserIs: allUser,
+      message: "ALL USER FETECHED SUCCESSFULLY",
+      status: 200,
+      data: {
+        allUser,
+      },
     });
-  } catch (e: any) {
-    return res.status(500).json({
-      errorIs: e.message,
-    });
+  } catch (e) {
+      next(e)
   }
 };
 
-export const findUserByIdController = async (req: Request, res: Response) => {
+export const findUserByIdController = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const body = req.body;
     const oneUser = await findUserByIdService(body.id);
-    if (oneUser == null) {
-      throw new Error("USER NOT EXIST");
+    if (!oneUser) {
+      return res.status(404).json({
+        message: "USER NOT FOUND",
+        status: 404,
+        data: oneUser,
+      });
     }
     return res.status(200).json({
-      messageIs: "FETCH SUCCESS",
+      message: "USER FETCHED SUCCESSFULLY",
+      status: 200,
       data: oneUser,
     });
-  } catch (error: any) {
-    res.status(500).json({
-      errorIs: error.message,
-    });
+  } catch (error) {
+    next(error)
   }
   return;
 };
