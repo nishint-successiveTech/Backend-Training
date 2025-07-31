@@ -17,9 +17,9 @@ class PlayerService {
     }
     return getAllPlayer;
   }
-  public static async getPlayerById(id: string) {
+  public static async getPlayerById(id:string) {
     const getPlayerById = await PlayerRepo.getPlayerById(id);
-    if (getPlayerById) {
+    if (!getPlayerById) {
       throw new Error("PLAYER NOT FOUND");
     }
     return getPlayerById;

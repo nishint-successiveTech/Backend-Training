@@ -1,43 +1,54 @@
-import { get } from "http";
 import PlayerService from "../services/playerService";
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 class PlayerController {
-  public static async createPlayer(req: Request, res: Response) {
+  public static async createPlayer(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const createPlayer = await PlayerService.createPlayer(req.body);
       res.status(201).json({
         data: createPlayer,
       });
     } catch (e) {
-      res.status(404).json({
-        message: e.message,
-      });
+      next(e);
     }
   }
-  public static async getAllPlayer(req: Request, res: Response) {
+
+  public static async getAllPlayer(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const getAllPlayer = await PlayerService.getAllPlayer();
       res.status(200).json({
         data: getAllPlayer,
       });
     } catch (e) {
-      res.status(404).json({
-        message: e.message,
-      });
+      next(e);
     }
   }
-  public static async getPlayerById(req: Request, res: Response) {
+
+  public static async getPlayerById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      const getPlayerById = await PlayerService.getPlayerById(req.params.id);
+      const getPlayerById = await PlayerService.getPlayerById(req.params.id.toString());
       res.status(200).json({ data: getPlayerById });
     } catch (e) {
-      res.status(404).json({
-        message: e.message,
-      });
+      next(e);
     }
   }
-  public static async updatePlayer(req: Request, res: Response) {
+  public static async updatePlayer(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const updatePlayer = await PlayerService.updatePlayer(
         req.params.id,
@@ -48,12 +59,14 @@ class PlayerController {
         data: updatePlayer,
       });
     } catch (e) {
-      res.status(404).json({
-        message: e.message,
-      });
+      next(e);
     }
   }
-  public static async deletePlayer(req: Request, res: Response) {
+  public static async deletePlayer(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const deletePlayer = await PlayerService.deletePlayer(req.params.id);
       res.status(200).json({
@@ -61,9 +74,7 @@ class PlayerController {
         data: deletePlayer,
       });
     } catch (e) {
-      res.status(404).json({
-        message: e.message,
-      });
+      next(e);
     }
   }
 }

@@ -5,13 +5,14 @@ class PlayerRepo {
     return await PlayerEntity.find();
   }
   public static async getPlayerById(id: string) {
-    return await PlayerEntity.findById(id);
+    return await PlayerEntity.findOne({id:id});
   }
   public static async createPlayer(data) {
-    const playerExist = await PlayerEntity.findOne(data._id);
+    const playerExist = await PlayerEntity.findOne({ name: data.name });
     if (playerExist) {
       throw new Error("PLAYER ALREADY EXIT");
     }
+
     return await PlayerEntity.create(data);
   }
   public static async updatePlayer(id: string, data) {

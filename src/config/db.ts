@@ -1,15 +1,12 @@
-import dotenv from "dotenv";
+import Config from "./config";
 import mongoose from "mongoose";
-
-dotenv.config();
 
 class Database {
   public static async connect() {
     try {
-      await mongoose.connect(process.env["MONGO_URL"] as string);
+      await mongoose.connect(Config.MONGO_URL);
       console.log("DB CONNECTED SUCCESSFULLY");
     } catch (e: any) {
-      //   throw new Error(e.message);
       console.error("DB NOT CONNECTED: " + e.message);
     }
   }

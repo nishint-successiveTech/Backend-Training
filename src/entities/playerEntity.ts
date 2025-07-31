@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const playerSchema = new mongoose.Schema({
-  id:{
-    type:String,
-    required:true
+  id: {
+    type: String,
+    required: true,
   },
   name: {
     type: String,
@@ -19,5 +19,5 @@ const playerSchema = new mongoose.Schema({
   },
 });
 
-const PlayerEntity = mongoose.model("Cricket4", playerSchema);
+const PlayerEntity = mongoose.model("Cricket5", playerSchema);
 export default PlayerEntity;
