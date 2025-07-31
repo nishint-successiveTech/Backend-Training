@@ -11,8 +11,8 @@ class AppServer {
 
   public static async start() {
     this.app = express();
-    this.setUpMiddleware();
     await this.connectDatabase();
+    this.setUpMiddleware();
     this.setupRoutes();
     this.setUpErrorMiddleware();
     this.listen();
