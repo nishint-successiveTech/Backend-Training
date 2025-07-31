@@ -1,56 +1,36 @@
-import express, { Request, Response } from "express";
-import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import PlayerRoutes from "./routes/playerRoute";
+import Database from "./config/db";
+import express, { Application } from "express";
 
-import { AuthRouter } from "./routes/AuthRoutes";
-import { MockRouter } from "./routes/MockRoutes";
-import { MathRouter } from "./routes/MathRoutes";
-import { CookieRouter } from "./routes/CookieRoutes";
-import { infoRequest } from "./middleware/infoRequest";
-import { anyError } from "./middleware/errorCatching";
-import { addCustomHeader } from "./middleware/customHeader";
-import { rateLimiter } from "./middleware/rateLimiter";
-import { RegistrationFormRouter } from "./routes/RegistrationFormRoute";
-import { queryValidator } from "./middleware/queryValidator";
-import { GeoLocationRouter } from "./routes/GeoLocationRoute";
-import { SportsRouter } from "./routes/SportsRoute";
-import { notFoundMiddleware } from "./middleware/notFoundMiddleware";
-import { ErrorShowRouter } from "./routes/ErrorShowRoute";
-import { FetchAPIRouter } from "./routes/FetchAPIRoute";
-import { userRouter } from "./routes/UserRoutes";
-import { HealthRouter } from "./routes/HealthRoute";
-import { CricketRouter } from "./routes/CricketRoute";
-import { userARouter } from "./routes/UserARegistrationRoute";
-import { userALoginRouter } from "./routes/UserALoginRoute";
-import { userAInfoRoute } from "./routes/userAInfoRoute";
+dotenv.config();
 
-const app = express();
+class AppServer {
+  private static app: Application;
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(addCustomHeader("HEADER-123456"));
-app.use(rateLimiter(1 * 60 * 1000, 10));
+  public static async start() {
+    this.app = express();
+    this.setUpMiddleware();
+    await this.connectDatabase();
+    this.setupRoutes();
+    this.listen();
+  }
 
-app.use(AuthRouter);
-app.use(CookieRouter);
-app.use(ErrorShowRouter);
-app.use(FetchAPIRouter);
-app.use(GeoLocationRouter);
-app.use(HealthRouter);
-app.use(MathRouter);
-app.use(MockRouter);
-app.use(RegistrationFormRouter);
-app.use('/sports', SportsRouter);
-app.use(userRouter);
-app.use(CricketRouter);
-app.use(userARouter);
-app.use(userALoginRouter);
-app.use(userAInfoRoute);
+  private static async connectDatabase() {
+    await Database.connect();
+  }
+  private static listen() {
+    const { PORT } = process.env || 9090;
+    this.app.listen(PORT, () => {
+      console.log("SERVER IS RUNNING ON PORT " + PORT);
+    });
+  }
 
-app.get("/", infoRequest, queryValidator, (req: Request, res: Response) => {
-  res.send("WELCOME NISHINT");
-});
-
-app.use(notFoundMiddleware);
-app.use(anyError);
-
-export default app;
+  private static setupRoutes() {
+    this.app.use("/api/players", PlayerRoutes.getRoutes());
+  }
+  private static setUpMiddleware() {
+    this.app.use(express.json());
+  }
+}
+export default AppServer;
