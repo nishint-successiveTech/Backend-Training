@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec tsx src/index.ts",
     "build": "tsc",
-    "start": "node ./dist/src/index.js"
+    "start": "node ./dist/src/index.js",
+    "test": "jest"
   },
   "author": "Nishint Goyal",
   "license": "ISC",
@@ -31,13 +32,16 @@
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^4.17.23",
     "@types/geoip-lite": "^1.4.4",
+    "@types/jest": "^30.0.0",
     "@types/joi": "^17.2.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash": "^4.17.20",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^20.19.7",
+    "jest": "^30.0.5",
     "nodemon": "^3.1.10",
     "playwright": "^1.54.1",
+    "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"

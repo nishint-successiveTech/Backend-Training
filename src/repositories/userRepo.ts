@@ -1,7 +1,7 @@
 import UserEntity from "../entities/userEntity";
 
 class UserRepo {
-  public static async register(data) {
+  public static async register(data:any) {
     const username = await UserEntity.findOne({ username: data.username });
     if (username) {
       throw new Error("Username Already Exist");
@@ -9,7 +9,7 @@ class UserRepo {
 
     return await UserEntity.create(data);
   }
-  public static async login(data) {
+  public static async login(data:any) {
     const username = await UserEntity.findOne({ username: data.username });
     if (!username) {
       throw new Error("Username not exist");

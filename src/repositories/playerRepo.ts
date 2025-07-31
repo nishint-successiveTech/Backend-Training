@@ -7,7 +7,7 @@ class PlayerRepo {
   public static async getPlayerById(id: string) {
     return await PlayerEntity.findOne({id:id});
   }
-  public static async createPlayer(data) {
+  public static async createPlayer(data:any) {
     const playerExist = await PlayerEntity.findOne({ name: data.name });
     if (playerExist) {
       throw new Error("PLAYER ALREADY EXIT");
@@ -15,7 +15,7 @@ class PlayerRepo {
 
     return await PlayerEntity.create(data);
   }
-  public static async updatePlayer(id: string, data) {
+  public static async updatePlayer(id: string, data:any) {
     return await PlayerEntity.findByIdAndUpdate(id, data, { new: true });
   }
   public static async deletePlayer(id: string) {

@@ -38,7 +38,7 @@ class PlayerController {
     next: NextFunction
   ) {
     try {
-      const getPlayerById = await PlayerService.getPlayerById(req.params.id.toString());
+      const getPlayerById = await PlayerService.getPlayerById(req.params["id"].toString());
       res.status(200).json({ data: getPlayerById });
     } catch (e) {
       next(e);
@@ -51,7 +51,7 @@ class PlayerController {
   ) {
     try {
       const updatePlayer = await PlayerService.updatePlayer(
-        req.params.id,
+        req.params["id"],
         req.body
       );
 
@@ -68,7 +68,7 @@ class PlayerController {
     next: NextFunction
   ) {
     try {
-      const deletePlayer = await PlayerService.deletePlayer(req.params.id);
+      const deletePlayer = await PlayerService.deletePlayer(req.params["id"]);
       res.status(200).json({
         message: "PLAYER IS DELETED",
         data: deletePlayer,

@@ -2,6 +2,7 @@ import UserService from "../services/userService";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import Config from "../config/config";
+import UserValidator from "../validation/userValidator";
 
 class UserController {
   public static async register(
@@ -10,13 +11,9 @@ class UserController {
     next: NextFunction
   ) {
     try {
-      const { username, password } = req.body;
-      if (!username) {
-        throw new Error("Username enter karo");
-      }
-      if (!password) {
-        throw new Error("Password enter karo");
-      }
+      const { error } = UserValidator.userValidator().validate(req.body);
+      if (error) throw new Error(error.details[0].message);
+
       const createUser = await UserService.register(req.body);
 
       return res.status(201).json({
