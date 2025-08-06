@@ -8,6 +8,7 @@ class PlayerRoutes {
 
     router.post("/createPlayer",PlayerController.createPlayer);
     router.get("/getAllPlayer", Authentication.authentication,PlayerController.getAllPlayer);
+    
     router.get("/getPlayerById/:id", PlayerController.getPlayerById);
     router.put("/updatePlayer/:id", PlayerController.updatePlayer);
     router.delete("/deletePlayer/:id", PlayerController.deletePlayer);

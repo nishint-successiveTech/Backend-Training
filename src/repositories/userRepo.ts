@@ -10,14 +10,14 @@ class UserRepo {
     return await UserEntity.create(data);
   }
   public static async login(data:any) {
-    const username = await UserEntity.findOne({ username: data.username });
-    if (!username) {
+    const user = await UserEntity.findOne({ username: data.username });
+    if (!user) {
       throw new Error("Username not exist");
     }
-    if (username.password != data.password) {
+    if (user.password != data.password) {
       throw new Error("Password wrong");
     }
-    return username;
+    return user;
   }
 }
 
