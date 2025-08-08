@@ -1,5 +1,6 @@
 import { required } from "joi";
 import mongoose, { Schema } from "mongoose";
+import { USER_ROLES } from "./userRoles";
 
 const userMaker = new mongoose.Schema({
   username: {
@@ -26,7 +27,7 @@ const userMaker = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["USER", "ADMIN", "DEVELOPER"],
+    enum: USER_ROLES,
     required: true,
   },
 });
