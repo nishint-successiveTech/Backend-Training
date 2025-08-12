@@ -4,9 +4,20 @@ import {
 } from "../controllers/UserAInfoController";
 import { Router } from "express";
 import { authenticate2 } from "../middleware/authentication2";
-import { infoRequest } from "../middleware/infoRequest";
+import { authorizeRoleChecker } from "../middleware/roleCheckMiddleware";
+import { USER_ROLES } from "../models/userRoles";
 
 export const userAInfoRoute = Router();
 
-userAInfoRoute.get("/userAInfoAllUsers", authenticate2, findAllUserController);
-userAInfoRoute.post("/findUserById", authenticate2, findUserByIdController);
+userAInfoRoute.get(
+  "/userAInfoAllUsers",
+  authenticate2,
+  authorizeRoleChecker([USER_ROLES[1]]),
+  findAllUserController
+);
+userAInfoRoute.post(
+  "/findUserById",
+  authenticate2,
+  authorizeRoleChecker(USER_ROLES),
+  findUserByIdController
+);

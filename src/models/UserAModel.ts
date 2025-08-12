@@ -1,11 +1,13 @@
+import { required } from "joi";
 import mongoose, { Schema } from "mongoose";
+import { USER_ROLES } from "./userRoles";
 
 const userMaker = new mongoose.Schema({
   username: {
     type: String,
     minlength: 5,
     required: true,
-    unique:true
+    unique: true,
   },
   password: {
     type: String,
@@ -23,6 +25,11 @@ const userMaker = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  role: {
+    type: String,
+    enum: USER_ROLES,
+    required: true,
+  },
 });
 
-export const UserAModel = mongoose.model("UserA12", userMaker);
+export const UserAModel = mongoose.model("NishTestDB3", userMaker);
